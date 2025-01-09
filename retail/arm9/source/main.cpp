@@ -57,15 +57,21 @@ static int dbg_printf(const char* format, ...) { // static int...
 	}
 
 	static FILE* debugFile;
+	static FILE* debugFile2;
 	debugFile = fopen(bootstrapOnFlashcard ? "fat:/NDSBTSRP.LOG" : "sd:/NDSBTSRP.LOG", "a");
+	debugFile2 = fopen(bootstrapOnFlashcard ? "fat:/NDSBTSRP_DEBUG.LOG" : "sd:/NDSBTSRP_DEBUG.LOG", "a");
+	
+	fprintf(debugFile, "[DEBUG] ");
 
 	va_list args;
 	va_start(args, format);
 	int ret = vprintf(format, args);
 	ret = vfprintf(debugFile, format, args);
+	ret = vfprintf(debugFile2, format, args);
 	va_end(args);
 
 	fclose(debugFile);
+	fclose(debugFile2);
 
 	return ret;
 }
