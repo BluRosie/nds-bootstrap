@@ -43,7 +43,7 @@ typedef struct {
 //extern bool logging;
 //bool logging = false;
 
-static bool debug = false;
+static bool debug = true;
 static bool sdFound = false;
 static bool bootstrapOnFlashcard = false;
 
